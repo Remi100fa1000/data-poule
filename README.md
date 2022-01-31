@@ -1,4 +1,4 @@
-# data poules :chicken:
+# :chicken: data poules :chicken:
 
 ## Objectif du dépôt
 
