@@ -7,11 +7,13 @@
 import sys
 import os
 
+# For importing my own files
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-print(SCRIPT_DIR)
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-from Mycsv_func.py import CSV_open_file
+#Import my own files
+import library.Mycsv_func as Mycsv_func
+import library.Array_func as Array_func
 
 ##############
 # PARAMETERS #
@@ -24,4 +26,9 @@ Mypath 				= './Data.csv';
 # CODE #
 ########
 
-CSV_open_file(Mypath)
+Mydata 				= Mycsv_func.CSV_open_file(Mypath)
+
+# Extracting the list of dates
+Array_func.string_to_date(Mydata)
+
+# Reorganizing the array

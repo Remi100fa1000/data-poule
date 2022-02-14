@@ -3,9 +3,14 @@
 # needed libraries
 import csv
 
-# This first function imports 
+# This first function imports the data from the array in a double dimensional list
 def CSV_open_file(file_path):
+	
+	Mylist 		= [] # We create an empty list	
+	
 	with open(file_path, newline='') as csvfile:
 		myreader = csv.reader(csvfile, delimiter=',')
 		for row in myreader:
-			print(row)
+			Mylist.append(row)
+			
+	return Mylist
