@@ -14,3 +14,5 @@ def CSV_open_file(file_path):
 			Mylist.append(row)
 			
 	return Mylist
+	
+
