@@ -20,4 +20,4 @@ License MIT
 ## Résultats
 Les résultats ci-dessous sont obtenus grâce aux scripts réalisés.
 
-![Distribution des oeufs](/results/dist_oeufs.pdf)
+![Distribution des oeufs](./results/dist_oeufs.pdf)
