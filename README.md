@@ -20,4 +20,4 @@ License MIT
 ## Résultats
 Les résultats ci-dessous sont obtenus grâce aux scripts réalisés.
 
-<img align="center" width="100%" src="results/dist_oeufs.png" alt="distribution des oeufs">
+<img align="center" width="50%" src="results/dist_oeufs.png" alt="distribution des oeufs">
