@@ -59,7 +59,7 @@ plt.xlabel("Poids de l'oeuf (g)")
 Mygraph_func.make_better_graph()
 
 # Saving the graph
-plt.savefig('./results/dist_oeufs.pdf')  
+plt.savefig('./results/dist_oeufs.png')  
 
 
 
