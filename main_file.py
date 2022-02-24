@@ -48,7 +48,7 @@ Mean_weight 		= round(sum(Eggs_weight)/len(Eggs_weight),2)
 
 # We want one bin per value
 plt.figure(facecolor='grey') # defining background color
-
+plt.subplots_adjust(top=0.85) # adjusting top position
 plt.hist(Eggs_weight, bins =(max(Eggs_weight)-min(Eggs_weight)), range = (min(Eggs_weight)-0.5, max(Eggs_weight)-0.5),density=True, color="darkorange", ec='white')
 plt.title(label="Distribution du poids des oeufs ramassés"+"\n poids moyen : "+str(Mean_weight)+ "g \n Dernière collecte le "+Mydata[len(Mydata)-1][0].strftime("%d/%m/%Y"),color='w')
 
@@ -60,7 +60,6 @@ Mygraph_func.make_better_graph()
 
 # Saving the graph
 plt.savefig('./results/dist_oeufs.png')  
-
 
 
 
