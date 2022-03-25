@@ -1,7 +1,7 @@
 # This file contains all the functions necessary for the management of the array
 
 # Necessary packages
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # This function changes the first column (date) into a datetime format
 # As a parameter we have the double dimensional list which contains 
@@ -47,3 +47,45 @@ def list_of_string_to_list_of_int(Mylistofstring):
 			Result.append(int(Tmp[i]))
 		
 	return Result
+	
+# This function changes a list of str into a list of int
+def int_list_to_string_list(Mylistofstring):
+
+	Result				= [];	
+	
+	# We append each element 
+	for i in range(0, len(Mylistofstring)):
+		Result.append(int(Mylistofstring[i]))
+		
+	return Result
+
+# This function changes the array of eggs collected into an array that contains statistics day per day
+def to_daily_stats(Mycsv):
+	
+	# My result as an array
+	Myresult 						= []
+	
+	# First day of the study
+	Firstdayofstudy 					= Mycsv[1][0] - timedelta(days=int(Mycsv[1][1])) # We get the first date in the array and remove the number of day since the last collect
+	
+	# Duration of the study
+	# Last day 
+	Lastdayofstudy						= Mycsv[len(Mycsv)-1][0]
+
+	# Duration
+	Mydelta 						= Lastdayofstudy- Firstdayofstudy
+
+	Total_duration 					= Mydelta.days
+	
+	# We make a list which contains all the dates
+	Listofdate						= []
+	
+	# We fill the array which contains all the dates
+	for i in range(Total_duration):
+		Listofdate.append(Firstdayofstudy+timedelta(days=i))
+	
+	# We now get the number of eggs per day and the total weight per day
+	# When one collect is done for several day, we use the average number of eggs by dividing the number of eggs by the duration of the collect
+	#TODO
+	
+	return Myresult

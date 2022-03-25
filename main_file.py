@@ -7,6 +7,9 @@
 import sys
 import os
 import matplotlib.pyplot as plt
+
+from datetime import datetime, timedelta # managing dates
+
 # For importing my own files
 mydir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(mydir))
@@ -61,6 +64,35 @@ Mygraph_func.make_better_graph()
 # Saving the graph
 plt.savefig('./results/dist_oeufs.png')  
 
+################################################
+# File which contains the general informations #
+################################################
+#These informations are:
+#		* The duration of the study
+#		* The total number of eggs
+#		* The average number of eggs per day and per chicken
 
+# Duration of the study
+
+# First day
+Firstdayofstudy 					= Mydata[1][0] - timedelta(days=int(Mydata[1][1])) # We get the first date in the array and remove the number of day since the last collect
+
+# Last day 
+Lastdayofstudy						= Mydata[len(Mydata)-1][0]
+
+# Duration
+Mydelta 						= Lastdayofstudy- Firstdayofstudy
+
+Total_duration 					= Mydelta.days
+
+# Total number of eggs
+Nb_Eggs_column 					= Array_func.get_colum(Mydata,2) # getting the column of eggs
+Nb_Eggs_column						= Array_func.int_list_to_string_list(Nb_Eggs_column)
+Nb_Eggs						= sum(Nb_Eggs_column[1:len(Nb_Eggs_column)-1])
+
+# The average number of eggs per days and per chicken
 
 # Reorganizing the array
+# We make a new array which contains the list of eggs day per day
+Array_func.to_daily_stats(Mydata)
+
