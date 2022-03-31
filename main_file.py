@@ -81,18 +81,22 @@ Firstdayofstudy 					= Mydata[1][0] - timedelta(days=int(Mydata[1][1])) # We get
 Lastdayofstudy						= Mydata[len(Mydata)-1][0]
 
 # Duration
-Mydelta 						= Lastdayofstudy- Firstdayofstudy
+Mydelta 							= Lastdayofstudy- Firstdayofstudy
 
-Total_duration 					= Mydelta.days
+Total_duration 						= Mydelta.days
 
 # Total number of eggs
-Nb_Eggs_column 					= Array_func.get_colum(Mydata,2) # getting the column of eggs
+Nb_Eggs_column 						= Array_func.get_colum(Mydata,2) # getting the column of eggs
 Nb_Eggs_column						= Array_func.int_list_to_string_list(Nb_Eggs_column)
-Nb_Eggs						= sum(Nb_Eggs_column[1:len(Nb_Eggs_column)-1])
+Nb_Eggs								= sum(Nb_Eggs_column[1:len(Nb_Eggs_column)-1])
+
+# TODO fill the file
 
 # The average number of eggs per days and per chicken
 
 # Reorganizing the array
 # We make a new array which contains the list of eggs day per day
-Array_func.to_daily_stats(Mydata)
+Array_per_day 						= Array_func.to_daily_stats(Mydata)
 
+# ploting some graphs based on this new array
+# TODO Make the graphs

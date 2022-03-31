@@ -66,11 +66,11 @@ def to_daily_stats(Mycsv):
 	Myresult 						= []
 	
 	# First day of the study
-	Firstdayofstudy 					= Mycsv[1][0] - timedelta(days=int(Mycsv[1][1])) # We get the first date in the array and remove the number of day since the last collect
+	Firstdayofstudy 				= Mycsv[1][0] - timedelta(days=int(Mycsv[1][1])) # We get the first date in the array and remove the number of day since the last collect
 	
 	# Duration of the study
 	# Last day 
-	Lastdayofstudy						= Mycsv[len(Mycsv)-1][0]
+	Lastdayofstudy					= Mycsv[len(Mycsv)-1][0]
 
 	# Duration
 	Mydelta 						= Lastdayofstudy- Firstdayofstudy
@@ -84,8 +84,48 @@ def to_daily_stats(Mycsv):
 	for i in range(Total_duration):
 		Listofdate.append(Firstdayofstudy+timedelta(days=i))
 	
-	# We now get the number of eggs per day and the total weight per day
+	# We now get:
+		# the number of eggs per day and 
+		# the total weight per day
+		# the number of chicken every day
+	
 	# When one collect is done for several day, we use the average number of eggs by dividing the number of eggs by the duration of the collect
-	#TODO
+	# We now make one list for every metric
+	Total_weight_per_day		= [0]*Total_duration
+	Nb_eggs_per_day		= [0]*Total_duration
+	Nb_chicken_per_day		= [0]*Total_duration
+	
+	Index_in_final_array 		= 0 # This is the index in the lists we are filling
+	
+	# We fill these lists
+	for i in range(1,len(Mycsv)):
+		
+		# Finding the current date
+		Current_date						= Mycsv[i][0]
+		Last_index						= Current_date-Firstdayofstudy # Last index for this box
+		Last_index						= Last_index.days-1
+
+		# Getting all the eggs for this collect
+		Eggs_weight						= Mycsv[i][3].split(',')
+		Total_weight						= 0
+		for j in range(len(Eggs_weight)):
+			if(len(Eggs_weight[j].strip())>0): # We check if the box is not empty
+				Total_weight						= Total_weight+int(Eggs_weight[j])
+		
+		# For each box in the array, we have as many boxes to fill in the new array as in the column 2
+		for j in range(int(Mycsv[i][1])):
+			Total_weight_per_day[Last_index-j]				= Total_weight_per_day[Last_index-j]+Total_weight/int(Mycsv[i][1])
+		
+		# filling the array which contains the number of eggs
+		for j in range(int(Mycsv[i][1])):
+			Nb_eggs_per_day[Last_index-j]					= Nb_eggs_per_day[Last_index-j]+int(Mycsv[i][2])/int(Mycsv[i][1])
+		
+		for j in range(int(Mycsv[i][1])):
+			Nb_chicken_per_day[Last_index-j]				= int(Mycsv[i][4])
+	
+	
+	# We now fill the result which is an array which contains all the lists
+	for i in range(len(Listofdate)):
+		Myresult.append([Listofdate[i], Total_weight_per_day[i],Nb_eggs_per_day[i], Nb_chicken_per_day[i]])
 	
 	return Myresult
