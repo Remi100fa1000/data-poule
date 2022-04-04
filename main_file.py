@@ -7,6 +7,7 @@
 import sys
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 from datetime import datetime, timedelta # managing dates
 
@@ -64,13 +65,12 @@ Mygraph_func.make_better_graph()
 # Saving the graph
 plt.savefig('./results/dist_oeufs.png')  
 
-################################################
-# File which contains the general informations #
-################################################
+###################################
+# Getting the general information #
+###################################
 #These informations are:
 #		* The duration of the study
 #		* The total number of eggs
-#		* The average number of eggs per day and per chicken
 
 # Duration of the study
 
@@ -84,13 +84,14 @@ Lastdayofstudy						= Mydata[len(Mydata)-1][0]
 Mydelta 							= Lastdayofstudy- Firstdayofstudy
 
 Total_duration 						= Mydelta.days
+print("Durée de l'étude :", Total_duration)
 
 # Total number of eggs
 Nb_Eggs_column 						= Array_func.get_colum(Mydata,2) # getting the column of eggs
-Nb_Eggs_column						= Array_func.int_list_to_string_list(Nb_Eggs_column)
-Nb_Eggs								= sum(Nb_Eggs_column[1:len(Nb_Eggs_column)-1])
+Nb_Eggs_column							= Array_func.int_list_to_string_list(Nb_Eggs_column)
+Nb_Eggs							= sum(Nb_Eggs_column[1:len(Nb_Eggs_column)-1])
 
-# TODO fill the file
+print("Nombre d'oeufs :", Nb_Eggs)
 
 # The average number of eggs per days and per chicken
 
@@ -99,4 +100,27 @@ Nb_Eggs								= sum(Nb_Eggs_column[1:len(Nb_Eggs_column)-1])
 Array_per_day 						= Array_func.to_daily_stats(Mydata)
 
 # ploting some graphs based on this new array
-# TODO Make the graphs
+#############################################
+
+# getting the columns
+Daily_weight 				= Array_func.get_colum(Array_per_day,1)
+Daily_nb_eggs 				= Array_func.get_colum(Array_per_day,2)
+Daily_nb_hen				= Array_func.get_colum(Array_per_day,3)
+
+# Going to numpy arrays
+Daily_weight				= np.array(Daily_weight)
+Daily_nb_eggs				= np.array(Daily_nb_eggs)
+Daily_nb_hen				= np.array(Daily_nb_hen)
+
+for row in Array_per_day:
+	print(row)
+
+print(Daily_nb_hen)
+# Number of eggs per hen
+Daily_egg_per_hen		 	= Daily_nb_eggs/Daily_nb_hen
+print(Daily_egg_per_hen)
+# Average weight of eggs
+plt.plot(Daily_egg_per_hen)
+
+plt.savefig('./results/Eggs_per_hen.png') 
+
