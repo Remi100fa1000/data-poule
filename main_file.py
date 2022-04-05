@@ -75,7 +75,7 @@ plt.savefig('./results/dist_oeufs.png')
 # Duration of the study
 
 # First day
-Firstdayofstudy 					= Mydata[1][0] - timedelta(days=int(Mydata[1][1])) # We get the first date in the array and remove the number of day since the last collect
+Firstdayofstudy 					= Mydata[1][0] - timedelta(days=int(Mydata[1][1])-1) # We get the first date in the array and remove the number of day since the last collect
 
 # Last day 
 Lastdayofstudy						= Mydata[len(Mydata)-1][0]
@@ -112,15 +112,12 @@ Daily_weight				= np.array(Daily_weight)
 Daily_nb_eggs				= np.array(Daily_nb_eggs)
 Daily_nb_hen				= np.array(Daily_nb_hen)
 
-for row in Array_per_day:
-	print(row)
-
-print(Daily_nb_hen)
+#print(Daily_nb_hen)
 # Number of eggs per hen
 Daily_egg_per_hen		 	= Daily_nb_eggs/Daily_nb_hen
-print(Daily_egg_per_hen)
-# Average weight of eggs
-plt.plot(Daily_egg_per_hen)
 
+# saving the result
+plt.figure(facecolor='grey') # defining background color
+plt.plot(Daily_egg_per_hen)
 plt.savefig('./results/Eggs_per_hen.png') 
 
