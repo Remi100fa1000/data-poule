@@ -112,7 +112,6 @@ Daily_weight				= np.array(Daily_weight)
 Daily_nb_eggs				= np.array(Daily_nb_eggs)
 Daily_nb_hen				= np.array(Daily_nb_hen)
 
-#print(Daily_nb_hen)
 # Number of eggs per hen
 Daily_egg_per_hen		 	= Daily_nb_eggs/Daily_nb_hen
 
@@ -151,9 +150,9 @@ Weight_of_eggs					= Daily_weight/Daily_nb_eggs
 # saving the result
 plt.figure(facecolor='grey') # defining background color
 plt.plot(Weight_of_eggs,color="darkorange")
-plt.title(label="Poid moyen des oeufs",color='w',fontsize=16)
+plt.title(label="Poids moyen des oeufs",color='w',fontsize=16)
 plt.xlabel("Jours depuis le début de l'étude",color='w',fontsize=12)
-plt.ylabel("Poid des oeufs",color='w',fontsize=12)
+plt.ylabel("Poids des oeufs",color='w',fontsize=12)
 plt.xlim(0,Total_duration-1)
 
 # Making a better figure
@@ -162,4 +161,46 @@ Mygraph_func.make_better_graph()
 plt.savefig('./results/Average_daily_weight.png')
 
 # We add an average filter so as to have better results
-#TODO
+
+# We make the same graphs with a 7 days filtering
+
+# Number of eggs per day and per hen
+plt.figure(facecolor='grey') # defining background color
+plt.plot(Array_func.Average_filter(Daily_egg_per_hen,7),color="darkorange")
+plt.title(label="Nombre d'oeufs par jour et par poule (filtré)",color='w')
+plt.xlabel("Jours depuis le début de l'étude",color='w',fontsize=12)
+plt.ylabel("Nombre d'oeufs par poule",color='w',fontsize=12)
+plt.xlim(0,Total_duration-1)
+# Making a better figure
+Mygraph_func.make_better_graph()
+
+plt.savefig('./results/Eggs_per_hen_filtered.png') 
+
+# We now show the number of eggs and compare it with the maximum number of eggs (Number of hen)
+
+# saving the result
+plt.figure(facecolor='grey') # defining background color
+plt.plot(Daily_nb_hen,color="g", label="Maximum") # Maximum number of eggs
+plt.plot(Array_func.Average_filter(Daily_nb_eggs,7),color="darkorange",label="Nombre d'oeufs")
+plt.title(label="Nombre d'oeufs (filtré)",color='w',fontsize=16)
+plt.xlabel("Jours depuis le début de l'étude",color='w',fontsize=12)
+plt.ylabel("Nombre d'oeufs",color='w',fontsize=12)
+plt.xlim(0,Total_duration-1)
+plt.legend()
+# Making a better figure
+Mygraph_func.make_better_graph()
+
+plt.savefig('./results/Eggs_per_day_filtered.png') 
+
+# saving the result
+plt.figure(facecolor='grey') # defining background color
+plt.plot(Array_func.Average_filter(Weight_of_eggs,7),color="darkorange")
+plt.title(label="Poids moyen des oeufs (filtré)",color='w',fontsize=16)
+plt.xlabel("Jours depuis le début de l'étude",color='w',fontsize=12)
+plt.ylabel("Poids des oeufs",color='w',fontsize=12)
+plt.xlim(0,Total_duration-1)
+
+# Making a better figure
+Mygraph_func.make_better_graph()
+
+plt.savefig('./results/Average_daily_weight_filtered.png')

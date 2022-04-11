@@ -2,6 +2,7 @@
 
 # Necessary packages
 from datetime import datetime, timedelta
+import math
 
 # This function changes the first column (date) into a datetime format
 # As a parameter we have the double dimensional list which contains 
@@ -127,3 +128,33 @@ def to_daily_stats(Mycsv):
 		Myresult.append([Listofdate[i], Total_weight_per_day[i],Nb_eggs_per_day[i], Nb_chicken_per_day[i]])
 	
 	return Myresult
+	
+# This function filters the data with a very basic average filter
+# Data is a one dimensional array of integers
+def Average_filter(Data, filter_length):
+	
+	# The data in the filter
+	Data_in_filter					= [0]*filter_length
+	Nb_data_in_filter				= 0
+	Myoutput					= [0]*len(Data)
+	
+	# We loop over the input data 
+	for i in range(len(Data)):
+		# We do not consider NaN data
+		if math.isnan(Data[i]):
+			Myoutput[i]			= math.nan
+		else:
+			if Nb_data_in_filter<filter_length:
+				Data_in_filter[Nb_data_in_filter]		= Data[i]
+				Nb_data_in_filter				= Nb_data_in_filter+1
+				Myoutput[i]					= sum(Data_in_filter)/Nb_data_in_filter
+			else:
+				# We shift data in the shift register
+				for j in range(filter_length-1):
+					Data_in_filter[j]			= Data_in_filter[j+1]
+				Data_in_filter[filter_length-1]		= Data[i]
+				Myoutput[i]					= sum(Data_in_filter)/Nb_data_in_filter
+
+	# Returning the result
+	return Myoutput
+
